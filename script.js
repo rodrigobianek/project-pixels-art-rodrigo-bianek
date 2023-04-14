@@ -57,3 +57,19 @@ for (let index = 0; index < 25; index += 1) { // criando 25 divs pra representar
   createPixelsBlock.className = 'pixel';
   divPixelsBoard.appendChild(createPixelsBlock);
 }
+
+// Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
+// e borda preta de 1px;
+
+// Exercicio 8 - Defina a cor preta como cor inicial da paleta de cores;
+const removeSelected = () => {
+  const selected = Array.from(document.querySelectorAll('.selected'));
+  for (let index = 0; index < selected.length; index += 1) {
+    index.classList.remove('selected');
+  }
+};
+
+window.onload = () => {
+  removeSelected();
+  document.querySelector('#black').classList.add('selected');
+};
