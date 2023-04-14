@@ -41,3 +41,19 @@ btnRandom.addEventListener('click', () => {
     ${randomRgb(0, 255)}`;
   }
 });
+
+// Exercicio 5 - Implenete uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página
+
+// Exercicio 6 - Adicione à página um quadro contendo 25 pixels
+const sectionTwo = document.createElement('section');
+document.getElementsByTagName('main')[0].appendChild(sectionTwo);
+
+const divPixelsBoard = document.createElement('div');
+divPixelsBoard.id = 'pixel-board';
+sectionTwo.appendChild(divPixelsBoard);
+
+for (let index = 0; index < 25; index += 1) {
+  const createPixelsBlock = document.createElement('div');
+  createPixelsBlock.className = 'pixel';
+  divPixelsBoard.appendChild(createPixelsBlock);
+}
