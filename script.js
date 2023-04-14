@@ -52,7 +52,7 @@ const divPixelsBoard = document.createElement('div');
 divPixelsBoard.id = 'pixel-board';
 sectionTwo.appendChild(divPixelsBoard);
 
-for (let index = 0; index < 25; index += 1) {
+for (let index = 0; index < 25; index += 1) { // criando 25 divs pra representar os pixels
   const createPixelsBlock = document.createElement('div');
   createPixelsBlock.className = 'pixel';
   divPixelsBoard.appendChild(createPixelsBlock);
