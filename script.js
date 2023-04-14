@@ -73,3 +73,16 @@ window.onload = () => {
   removeSelected();
   document.querySelector('#black').classList.add('selected');
 };
+
+// Exercicio 9 - Crie uma função para selecionar uma cor na paleta de cores;
+
+// a cor clicada deve ser a única selecionada.
+
+const selectColor = (event) => {
+  const selected = document.querySelectorAll('.selected');
+  selected.forEach((element) => {
+    element.classList.remove('selected');
+  });
+  event.target.classList.toggle('selected');
+};
+colorsDiv.addEventListener('click', selectColor);
