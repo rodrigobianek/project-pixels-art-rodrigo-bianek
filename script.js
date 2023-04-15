@@ -122,3 +122,9 @@ const resetBtn = document.createElement('button');
 resetBtn.id = 'clear-board';
 resetBtn.innerText = 'Limpar';
 document.querySelector('#color-palette').parentNode.appendChild(resetBtn);
+
+resetBtn.addEventListener('click', () => {
+  document.querySelectorAll('.pixel').forEach((el) => {
+    el.style.backgroundColor = 'white';
+  })
+});
