@@ -1,5 +1,5 @@
 // Exercicio 1 - Adicione à página o título "Paleta de Cores";
-
+const defaultbg = 'rgb(255,255,255';
 // Exercicio 2 - Adicinando uma paleta de cores contendo quatro cores distintas;
 const firstSection = document.createElement('section');
 document.getElementsByTagName('main')[0].appendChild(firstSection);
@@ -87,6 +87,7 @@ sectionTwo.appendChild(divPixelsBoard);
 for (let index = 0; index < 25; index += 1) { // criando 25 divs pra representar os pixels
   const createPixelsBlock = document.createElement('div');
   createPixelsBlock.className = 'pixel';
+  createPixelsBlock.style.backgroundColor = 'rgb(255,255,255)';
   divPixelsBoard.appendChild(createPixelsBlock);
 }
 
@@ -131,10 +132,18 @@ pixels.forEach((element) => {
   element.addEventListener('click', applyColor);
 });
 
+const removeColor = (e) => {
+  e.preventDefault()
+  e.target.style.backgroundColor = defaultbg;
+};
+
+divPixelsBoard.addEventListener('contextmenu', removeColor);
+
 // Exercicio 11 - Crie um botão que retorne a cor do quadro para a cor inicial;
 const resetBtn = document.createElement('button');
 resetBtn.id = 'clear-board';
 resetBtn.innerText = 'Limpar';
+localStorage.removeItem('pixelBoard');
 document.querySelector('#color-palette').parentNode.appendChild(resetBtn);
 
 resetBtn.addEventListener('click', () => {
@@ -145,18 +154,18 @@ resetBtn.addEventListener('click', () => {
 });
 
 // Exercicio 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage;
-// const pixelsStorage = [];
+const pixelsStorage = [];
 
-// const savePixels = () => {
-//   const arrPixelDiv = Array.from(document.getElementsByClassName('pixel'));
-//   arrPixelDiv.forEach((p) => {
-//     if (p.style.backgroundColor !== 'white' || p.style.backgroundColor !== 'rgb(255,255,255)') {
-//       pixelsStorage.push(p.style.backgroundColor);
-//     }
-//     localStorage.setItem('pixelBoard', JSON.stringify(pixelsStorage));
-//   });
-// };
-// savePixels();
+const savePixels = () => {
+  const arrPixelDiv = Array.from(document.getElementsByClassName('painted'));
+  arrPixelDiv.forEach((p) => {
+    if (p.style.backgroundColor !== 'white' || p.style.backgroundColor !== 'rgb(255,255,255)') {
+      pixelsStorage.push(p.style.backgroundColor);
+    }
+    localStorage.setItem('pixelBoard', JSON.stringify(pixelsStorage));
+  });
+};
+savePixels();
 
 // Exercicio 13 - Crie um input que permita à pessoa usuária preencher um novo tamanho
 // para o quadro de pixels
@@ -167,8 +176,8 @@ resetBtn.addEventListener('click', () => {
 
 const inputSize = document.createElement('div');
 inputSize.id = 'input';
-document.querySelector('#color-palette').parentNode.parentNode.appendChild(inputSize);
+firstSection.firstElementChild.appendChild(inputSize);
 
 const addInput = document.createElement('input');
 addInput.id = 'board-size';
-firstSection.appendChild(addInput);
+inputSize.appendChild(addInput);
