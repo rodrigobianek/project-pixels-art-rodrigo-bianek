@@ -53,3 +53,10 @@ div .color {
   width: 90px;
   height: 20px;
 }
+
+#board-size {
+  padding: 7px;
+  margin: auto;
+  width: 10px;
+  height: 2px;
+}

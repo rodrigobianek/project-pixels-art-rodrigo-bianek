@@ -141,3 +141,32 @@ resetBtn.addEventListener('click', () => {
     e.style.backgroundColor = 'white';
   });
 });
+
+// Exercicio 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage;
+// const pixelsStorage = [];
+
+// const savePixels = () => {
+//   const arrPixelDiv = Array.from(document.getElementsByClassName('pixel'));
+//   arrPixelDiv.forEach((p) => {
+//     if (p.style.backgroundColor !== 'white' || p.style.backgroundColor !== 'rgb(255,255,255)') {
+//       pixelsStorage.push(p.style.backgroundColor);
+//     }
+//     localStorage.setItem('pixelBoard', JSON.stringify(pixelsStorage));
+//   });
+// };
+// savePixels();
+
+// Exercicio 13 - Crie um input que permita à pessoa usuária preencher um novo tamanho
+// para o quadro de pixels
+
+// Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
+
+// Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
+
+const inputSize = document.createElement('div');
+inputSize.id = 'input';
+document.querySelector('#color-palette').parentNode.parentNode.appendChild(inputSize);
+
+const addInput = document.createElement('input');
+addInput.id = 'board-size';
+firstSection.appendChild(addInput);
