@@ -94,7 +94,6 @@ window.onload = () => {
 };
 
 // Exercicio 9 - Crie uma função para selecionar uma cor na paleta de cores;
-
 // a cor clicada deve ser a única selecionada.
 
 const selectColor = (event) => {
@@ -109,8 +108,8 @@ colorsDiv.addEventListener('click', selectColor);
 // Exercicio 10 - Crie uma função que permita preencher um pixel do quadro com a
 // cor selecionada na paleta de cores
 
-const applyColor = (event) => {
-  event.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
+const applyColor = (e) => {
+  e.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
 };
 
 const pixels = Array.from(document.querySelectorAll('.pixel'));
@@ -119,3 +118,7 @@ pixels.forEach((element) => {
 });
 
 // Exercicio 11 - Crie um botão que retorne a cor do quadro para a cor inicial;
+const resetBtn = document.createElement('button');
+resetBtn.id = 'clear-board';
+resetBtn.innerText = 'Limpar';
+document.querySelector('#color-palette').parentNode.appendChild(resetBtn);

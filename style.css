@@ -46,3 +46,10 @@ div .color {
   height: 40px;
   background-color: white;
 }
+
+#clear-board {
+  margin-block: 10px;
+  font-size: 10px;
+  width: 90px;
+  height: 20px;
+}
