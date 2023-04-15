@@ -35,14 +35,33 @@ const randomRgb = (min, max) => min + Math.floor(Math.random() * (max - min + 1)
 btnRandom.addEventListener('click', () => {
   const classColor = document.querySelectorAll('.color');
   for (let index = 1; index < classColor.length; index += 1) {
-    classColor[index].classList.add('random');
     classColor[index].style.backgroundColor = `rgb(${randomRgb(0, 255)},
     ${randomRgb(0, 255)},
     ${randomRgb(0, 255)}`;
   }
+  saveState();
 });
+// Exercicio 5 - Implenete uma função usando localStorage para que a paleta de cores
+// gerada aleatoriamente seja mantida após recarregar a página
 
-// Exercicio 5 - Implenete uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página
+const saveState = () => {
+  const lastStatus = {
+    firstColor: document.querySelector('#black').style.backgroundColor,
+    secondColor: document.querySelector('#blue').style.backgroundColor,
+    thirdColor: document.querySelector('#green').style.backgroundColor,
+    fourthColor: document.querySelector('#red').style.backgroundColor,
+  };
+  const stringStatus = JSON.stringify(lastStatus);
+  localStorage.setItem('LAST_STATUS', stringStatus);
+};
+
+const loadState = () => {
+  const lastStatus = localStorage.getItem('LAST_STATUS');
+  document.querySelector('#black').style.backgroundColor = lastStatus.firstColor;
+  document.querySelector('#blue').style.backgroundColor = lastStatus.secondColor;
+  document.querySelector('#green').style.backgroundColor = lastStatus.thirdColor;
+  document.querySelector('#red').style.backgroundColor = lastStatus.fourthColor;
+};
 
 // Exercicio 6 - Adicione à página um quadro contendo 25 pixels
 const sectionTwo = document.createElement('section');
@@ -86,3 +105,6 @@ const selectColor = (event) => {
   event.target.classList.toggle('selected');
 };
 colorsDiv.addEventListener('click', selectColor);
+
+// 10 - Crie uma função que permita preencher um pixel do quadro com a
+// cor selecionada na paleta de cores
