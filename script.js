@@ -8,6 +8,10 @@ const colorsDiv = document.createElement('div');
 colorsDiv.id = 'color-palette';
 firstSection.appendChild(colorsDiv);
 
+const menuDiv = document.createElement('div');
+menuDiv.id = 'menu';
+firstSection.appendChild(menuDiv);
+
 const createDiv = (color) => {
   const divPalette = document.createElement('div');
   divPalette.className = 'color';
@@ -73,7 +77,7 @@ btnRandom.addEventListener('click', () => {
   }
   saveState();
 });
-// Exercicio 5 - Implenete uma função usando localStorage para que a paleta de cores
+// Exercicio 5 - Implemente uma função usando localStorage para que a paleta de cores
 // gerada aleatoriamente seja mantida após recarregar a página
 
 // Exercicio 6 - Adicione à página um quadro contendo 25 pixels
@@ -82,13 +86,17 @@ document.getElementsByTagName('main')[0].appendChild(sectionTwo);
 
 const divPixelsBoard = document.createElement('div');
 divPixelsBoard.id = 'pixel-board';
+divPixelsBoard.style.width = '200px';
+divPixelsBoard.style.height = '200px';
 sectionTwo.appendChild(divPixelsBoard);
 
 for (let index = 0; index < 25; index += 1) { // criando 25 divs pra representar os pixels
-  const createPixelsBlock = document.createElement('div');
-  createPixelsBlock.className = 'pixel';
-  createPixelsBlock.style.backgroundColor = 'rgb(255,255,255)';
-  divPixelsBoard.appendChild(createPixelsBlock);
+  const pixelBlock = document.createElement('div');
+  pixelBlock.className = 'pixel';
+  pixelBlock.style.backgroundColor = 'rgb(255,255,255)';
+  pixelBlock.style.width = '40px';
+  pixelBlock.style.height = '40px';
+  divPixelsBoard.appendChild(pixelBlock);
 }
 
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
@@ -133,7 +141,7 @@ pixels.forEach((element) => {
 });
 
 const removeColor = (e) => {
-  e.preventDefault()
+  e.preventDefault();
   e.target.style.backgroundColor = defaultbg;
 };
 
@@ -176,8 +184,17 @@ savePixels();
 
 const inputSize = document.createElement('div');
 inputSize.id = 'input';
-firstSection.firstElementChild.appendChild(inputSize);
+firstSection.firstChild.nextElementSibling.appendChild(inputSize);
 
 const addInput = document.createElement('input');
 addInput.id = 'board-size';
+addInput.type = 'number';
+addInput.placeholder = 'Qtd. Pixels: 1 ~ 50';
+addInput.min = '1';
+addInput.max = '50';
 inputSize.appendChild(addInput);
+
+const inputBtn = document.createElement('button');
+inputBtn.id = 'generate-board';
+inputBtn.innerText = 'VQV';
+inputSize.appendChild(inputBtn);
