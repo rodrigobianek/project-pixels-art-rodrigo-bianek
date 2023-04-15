@@ -55,13 +55,13 @@ btnRandom.addEventListener('click', () => {
 // Exercicio 5 - Implenete uma função usando localStorage para que a paleta de cores
 // gerada aleatoriamente seja mantida após recarregar a página
 
-const loadState = () => {
+function loadState() {
   const lastStatus = JSON.parse(localStorage.getItem('colorPalette'));
   document.querySelector('#black').style.backgroundColor = lastStatus.firstColor;
   document.querySelector('#blue').style.backgroundColor = lastStatus.secondColor;
   document.querySelector('#green').style.backgroundColor = lastStatus.thirdColor;
   document.querySelector('#red').style.backgroundColor = lastStatus.fourthColor;
-};
+}
 
 // Exercicio 6 - Adicione à página um quadro contendo 25 pixels
 const sectionTwo = document.createElement('section');
@@ -111,10 +111,10 @@ colorsDiv.addEventListener('click', selectColor);
 
 const applyColor = (event) => {
   event.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
-}
+};
 
 const pixels = Array.from(document.querySelectorAll('.pixel'));
-pixels.forEach((element) => { 
+pixels.forEach((element) => {
   element.addEventListener('click', applyColor);
 });
 
