@@ -123,6 +123,7 @@ colorsDiv.addEventListener('click', selectColor);
 
 const applyColor = (e) => {
   e.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
+  e.target.classList.toggle('painted');
 };
 
 const pixels = Array.from(document.querySelectorAll('.pixel'));
@@ -139,6 +140,7 @@ document.querySelector('#color-palette').parentNode.appendChild(resetBtn);
 resetBtn.addEventListener('click', () => {
   document.querySelectorAll('.pixel').forEach((e) => {
     e.style.backgroundColor = 'white';
+    e.classList.remove('painted');
   });
 });
 
