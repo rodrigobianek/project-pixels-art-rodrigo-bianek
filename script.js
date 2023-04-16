@@ -159,7 +159,6 @@ const selectColor = (event) => {
   event.target.classList.toggle('selected');
 };
 colorsDiv.addEventListener('click', selectColor);
-
 // Exercicio 10 - Crie uma função que permita preencher um pixel do quadro com a
 // cor selecionada na paleta de cores
 const saveDraw = () => {
@@ -186,6 +185,7 @@ const saveBoardStyle = () => {
 const applyColor = (e) => {
   e.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
   e.target.classList.toggle('painted');
+  saveBoardStyle();
   saveDraw();
 };
 
@@ -260,7 +260,6 @@ inputBtn.addEventListener('click', () => {
   saveBoardStyle();
 });
 // Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
-// function savedDraw() => {}
 
 function recoverBoardSize() {
   if (localStorage.getItem('boardSize')) {
