@@ -1,6 +1,7 @@
 // Exercicio 1 - Adicione à página o título "Paleta de Cores";
 const defaultbg = 'rgb(255,255,255';
 // Exercicio 2 - Adicinando uma paleta de cores contendo quatro cores distintas;
+
 const firstSection = document.createElement('section');
 document.getElementsByTagName('main')[0].appendChild(firstSection);
 
@@ -95,7 +96,7 @@ sectionTwo.appendChild(divPixelsBoard);
 const mainBoard = document.getElementById('pixel-board');
 
 const addPixels = (num) => {
-  for (let index = 0; index < num; index += 1) { // criando 25 divs pra representar os pixels
+  for (let index = 0; index < num; index += 1) {
     const pixelBlock = document.createElement('div');
     pixelBlock.className = 'pixel';
     pixelBlock.style.backgroundColor = 'rgb(255,255,255)';
@@ -104,7 +105,6 @@ const addPixels = (num) => {
     divPixelsBoard.appendChild(pixelBlock);
   }
 };
-
 addPixels(25);
 
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
@@ -221,18 +221,16 @@ const newSizeBoard = () => {
   });
 };
 
+// Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
+
 inputBtn.addEventListener('click', () => {
   if (inputValue.value >= 5 && inputValue.value < 50) {
     newSizeBoard();
   } else if (inputValue.value >= 50) {
     inputValue.value = 50;
     newSizeBoard();
-    mainBoard.style.margin = 'auto';
   } else {
     alert('Board inválido!');
   }
 });
-
-// Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
-
 // Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
