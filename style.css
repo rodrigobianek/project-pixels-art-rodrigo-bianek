@@ -33,6 +33,8 @@ div .color {
   flex-wrap: wrap;
   margin: auto;
   border: 1px solid black;
+  box-sizing: content-box;
+  padding: 2px;
 }
 
 .pixel {

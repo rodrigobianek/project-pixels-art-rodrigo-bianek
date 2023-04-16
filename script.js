@@ -197,29 +197,39 @@ const addInput = document.createElement('input');
 addInput.id = 'board-size';
 addInput.type = 'number';
 addInput.placeholder = 'Qtd. Pixels: 5 ~ 50';
-addInput.min = '5';
+addInput.min = '1';
 addInput.max = '50';
+addInput.maxlength = '2';
 inputSize.appendChild(addInput);
 
 const inputBtn = document.createElement('button');
 inputBtn.id = 'generate-board';
 inputBtn.innerText = 'VQV';
 inputSize.appendChild(inputBtn);
+
 const inputValue = document.querySelector('#board-size');
 
+const newSizeBoard = () => {
+  mainBoard.style.height = `${inputValue.value * pixelSize}px`;
+  mainBoard.style.width = `${inputValue.value * pixelSize}px`;
+  mainBoard.innerHTML = '';
+  const newPixelsDiv = (inputValue.value) * (inputValue.value);
+  addPixels(newPixelsDiv);
+  pixels = Array.from(document.querySelectorAll('.pixel'));
+  pixels.forEach((element) => {
+    element.addEventListener('click', applyColor);
+  });
+};
+
 inputBtn.addEventListener('click', () => {
-  if (inputValue.value >= 5 && inputValue.value <= 50) {
-    mainBoard.style.height = `${inputValue.value * pixelSize}px`;
-    mainBoard.style.width = `${inputValue.value * pixelSize}px`;
-    mainBoard.innerHTML = '';
-    const newPixelsDiv = (inputValue.value) * (inputValue.value);
-    addPixels(newPixelsDiv);
-    pixels = Array.from(document.querySelectorAll('.pixel'));
-    pixels.forEach((element) => {
-      element.addEventListener('click', applyColor);
-    });
+  if (inputValue.value >= 5 && inputValue.value < 50) {
+    newSizeBoard();
+  } else if (inputValue.value >= 50) {
+    inputValue.value = 50;
+    newSizeBoard();
+    mainBoard.style.margin = 'auto';
   } else {
-    alert('Board inválido!')
+    alert('Board inválido!');
   }
 });
 
