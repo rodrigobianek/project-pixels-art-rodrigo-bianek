@@ -117,14 +117,19 @@ const addPixels = (num) => {
 addPixels(25);
 
 const recoverDraw = () => {
-  const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
-  const pixelStorage = JSON.parse(localStorage.getItem('pixelBoard'));
-  const recoveredBoard = [];
-  pixelStorage.forEach((n) => {
-    recoveredBoard.push(n.color);
-    return recoveredBoard;
-  });
-  console.log(recoveredBoard);
+  if (localStorage.getItem('pixelBoard') !== null) {
+    const pixelStorage = JSON.parse(localStorage.getItem('pixelBoard'));
+    const recoveredBoard = [];
+    pixelStorage.forEach((n) => {
+      recoveredBoard.push(n.color);
+    });
+    const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
+    for (let index = 0; index < pixelsinfo.length; index += 1) {
+      pixelsinfo[index].style.backgroundColor = recoveredBoard[index];
+    }
+  } else {
+    console.log('Não há blocos pintados!');
+  }
 };
 
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
@@ -255,13 +260,7 @@ inputBtn.addEventListener('click', () => {
   saveBoardStyle();
 });
 // Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
-const savedDraw = () => {
-  mainBoard.innerHTML = '';
-  recoverBoardSize();
-  const recoverSize = JSON.parse(localStorage.boardSize);
-  const newPixelsDiv = recoverSize.pixels;
-  addPixels(newPixelsDiv);
-};
+// function savedDraw() => {}
 
 function recoverBoardSize() {
   if (localStorage.getItem('boardSize')) {
@@ -272,8 +271,9 @@ function recoverBoardSize() {
       mainBoard.style.width = recoverSize.width;
       mainBoard.style.height = recoverSize.height;
       const newPixelsDiv = recoverSize.pixels;
-      addEventToBoard();
       addPixels(newPixelsDiv);
+      recoverDraw();
+      addEventToBoard();
     }
   }
 }
