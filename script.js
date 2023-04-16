@@ -143,7 +143,7 @@ const applyColor = (e) => {
   e.target.classList.toggle('painted');
 };
 
-const pixels = Array.from(document.querySelectorAll('.pixel'));
+let pixels = Array.from(document.querySelectorAll('.pixel'));
 pixels.forEach((element) => {
   element.addEventListener('click', applyColor);
 });
@@ -208,11 +208,19 @@ inputSize.appendChild(inputBtn);
 const inputValue = document.querySelector('#board-size');
 
 inputBtn.addEventListener('click', () => {
-  mainBoard.style.height = `${inputValue.value * pixelSize}px`;
-  mainBoard.style.width = `${inputValue.value * pixelSize}px`;
-  mainBoard.innerHTML = '';
-  const newPixelsDiv = (inputValue.value) * (inputValue.value);
-  addPixels(newPixelsDiv);
+  if (inputValue.value >= 5 && inputValue.value <= 50) {
+    mainBoard.style.height = `${inputValue.value * pixelSize}px`;
+    mainBoard.style.width = `${inputValue.value * pixelSize}px`;
+    mainBoard.innerHTML = '';
+    const newPixelsDiv = (inputValue.value) * (inputValue.value);
+    addPixels(newPixelsDiv);
+    pixels = Array.from(document.querySelectorAll('.pixel'));
+    pixels.forEach((element) => {
+      element.addEventListener('click', applyColor);
+    });
+  } else {
+    alert('Board inválido!')
+  }
 });
 
 // Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
