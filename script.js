@@ -138,9 +138,19 @@ colorsDiv.addEventListener('click', selectColor);
 // Exercicio 10 - Crie uma função que permita preencher um pixel do quadro com a
 // cor selecionada na paleta de cores
 
+const savePixels = () => {
+  const arrPixels = document.querySelectorAll('.pixel');
+  const paintedPixels = [];
+  for (let index = 0; index < arrPixels.length; index += 1) {
+    paintedPixels.push(arrPixels[index].style.backgroundColor);
+    localStorage.setItem('pixelBoard', JSON.stringify(paintedPixels));
+  }
+};
+
 const applyColor = (e) => {
   e.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
   e.target.classList.toggle('painted');
+  savePixels();
 };
 
 let pixels = Array.from(document.querySelectorAll('.pixel'));
@@ -167,24 +177,23 @@ document.querySelector('#color-palette').parentNode.appendChild(resetBtn);
 
 resetBtn.addEventListener('click', () => {
   document.querySelectorAll('.pixel').forEach((e) => {
-    e.style.backgroundColor = 'white';
+    e.style.backgroundColor = 'rgb(255,255,255)';
     e.classList.remove('painted');
+    savePixels();
   });
 });
 
 // Exercicio 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage;
-const pixelsStorage = [];
-
-const savePixels = () => {
-  const arrPixelDiv = Array.from(document.getElementsByClassName('painted'));
-  arrPixelDiv.forEach((p) => {
-    if (p.style.backgroundColor !== 'white' || p.style.backgroundColor !== 'rgb(255,255,255)') {
-      pixelsStorage.push(p.style.backgroundColor);
-    }
-    localStorage.setItem('pixelBoard', JSON.stringify(pixelsStorage));
-  });
+const arrPixels = Array.from(document.querySelectorAll('.pixel'));
+const recoverPixels = () => {
+  const paintedPixels = JSON.parse(localStorage.getItem('pixelBoard'));
+  if (paintedPixels) {
+    paintedPixels.forEach((i) => {
+      arrPixels[i].style.backgroundColor = paintedPixels[i];
+    });
+  }
 };
-savePixels();
+recoverPixels();
 
 // Exercicio 13 - Crie um input que permita à pessoa usuária preencher um novo tamanho
 // para o quadro de pixels
