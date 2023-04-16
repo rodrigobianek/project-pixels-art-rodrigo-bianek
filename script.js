@@ -274,6 +274,9 @@ function recoverBoardSize() {
       addPixels(newPixelsDiv);
       recoverDraw();
       addEventToBoard();
+    } else {
+      recoverDraw();
+      addEventToBoard();
     }
   }
 }
