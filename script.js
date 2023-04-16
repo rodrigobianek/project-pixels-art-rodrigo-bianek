@@ -1,5 +1,14 @@
 // Exercicio 1 - Adicione à página o título "Paleta de Cores";
-const defaultbg = 'rgb(255,255,255';
+const defaultbg = '#FFFFFFF';
+const defaultBoard = () => {
+  const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
+  const localStorageDefault = [];
+  for (let p = 0; p < pixelsinfo.length; p += 1) {
+    const defaultColor = { color: pixelsinfo[p].style.backgroundColor = defaultbg };
+    localStorageDefault.push(defaultColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(localStorageDefault));
+};
 // Exercicio 2 - Adicinando uma paleta de cores contendo quatro cores distintas;
 
 const firstSection = document.createElement('section');
@@ -45,6 +54,8 @@ const setLocalStorage = () => {
       green: 'green',
       red: 'red',
     }));
+  } else if (!localStorage.key('pixelBoard')) {
+    defaultBoard();
   }
 };
 setLocalStorage();
@@ -78,8 +89,7 @@ btnRandom.addEventListener('click', () => {
   }
   saveState();
 });
-// Exercicio 5 - Implemente uma função usando localStorage para que a paleta de cores
-// gerada aleatoriamente seja mantida após recarregar a página
+// Exercicio 5 - Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página
 
 // Exercicio 6 - Adicione à página um quadro contendo 25 pixels
 const sectionTwo = document.createElement('section');
@@ -90,7 +100,6 @@ const divPixelsBoard = document.createElement('div');
 divPixelsBoard.style.width = '210px';
 divPixelsBoard.style.height = '210px';
 divPixelsBoard.id = 'pixel-board';
-
 sectionTwo.appendChild(divPixelsBoard);
 
 const mainBoard = document.getElementById('pixel-board');
@@ -107,6 +116,25 @@ const addPixels = (num) => {
 };
 addPixels(25);
 
+const recoverDraw = () => {
+  const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
+  const pixelStorage = JSON.parse(localStorage.getItem('pixelBoard'));
+  const recoveredBoard = [];
+  pixelStorage.forEach((n) => {
+    recoveredBoard.push(n.color);
+    return recoveredBoard;
+  });
+  console.log(recoveredBoard);
+};
+
+function recoverBoardSize() {
+  const recoverSize = JSON.parse(localStorage.boardSize);
+  const pixels = document.querySelectorAll('.pixel').length;
+  if (recoverSize.pixels !== pixels) {
+    mainBoard.style.width = recoverSize.width;
+    mainBoard.style.height = recoverSize.height;
+  }
+}
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
 // e borda preta de 1px;
 
@@ -137,22 +165,31 @@ colorsDiv.addEventListener('click', selectColor);
 
 // Exercicio 10 - Crie uma função que permita preencher um pixel do quadro com a
 // cor selecionada na paleta de cores
+const saveDraw = () => {
+  const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
+  const localStoragePixels = [];
+  pixelsinfo.forEach((p) => {
+    const pixelColor = { color: p.style.backgroundColor };
+    localStoragePixels.push(pixelColor);
+  });
+  localStorage.setItem('pixelBoard', JSON.stringify(localStoragePixels));
+};
 
-const savePixels = () => {
-  const arrPixels = document.querySelectorAll('.pixel');
-  const storagePixels = [];
-  for (let index = 0; index < arrPixels.length; index += 1) {
-    storagePixels.push({
-      size: pixelSize,
-      color: arrPixels[index].style.backgroundColor,
-    });
-    localStorage.setItem('pixelBoard', JSON.stringify(storagePixels));
-  }
+const saveBoardStyle = () => {
+  const pixelsinfo = Array.from(document.querySelectorAll('.pixel'));
+  const boardProperties = {
+    size: pixelSize,
+    width: mainBoard.style.width,
+    height: mainBoard.style.height,
+    pixels: pixelsinfo.length,
+  };
+  localStorage.boardSize = JSON.stringify(boardProperties);
 };
 
 const applyColor = (e) => {
   e.target.style.backgroundColor = document.querySelector('.selected').style.backgroundColor;
   e.target.classList.toggle('painted');
+  saveDraw();
 };
 
 let pixels = Array.from(document.querySelectorAll('.pixel'));
@@ -160,43 +197,31 @@ pixels.forEach((element) => {
   element.addEventListener('click', applyColor);
 });
 
-const removeColor = (e) => {
-  e.preventDefault();
-  e.target.style.backgroundColor = defaultbg;
-  if (e.target.classList.contains('painted')) {
-    e.target.classList.remove('painted');
-  }
-};
+// const removeColor = (e) => {
+//   e.preventDefault();
+//   e.target.style.backgroundColor = defaultbg;
+//   if (e.target.classList.contains('painted')) {
+//     e.target.classList.remove('painted');
+//   }
+// };
 
-divPixelsBoard.addEventListener('contextmenu', removeColor);
+// divPixelsBoard.addEventListener('contextmenu', removeColor);
 
 // Exercicio 11 - Crie um botão que retorne a cor do quadro para a cor inicial;
 const resetBtn = document.createElement('button');
 resetBtn.id = 'clear-board';
 resetBtn.innerText = 'Limpar';
-localStorage.removeItem('pixelBoard');
 document.querySelector('#color-palette').parentNode.appendChild(resetBtn);
 
 resetBtn.addEventListener('click', () => {
   document.querySelectorAll('.pixel').forEach((e) => {
     e.style.backgroundColor = 'rgb(255,255,255)';
     e.classList.remove('painted');
-
+    defaultBoard();
   });
 });
 
 // Exercicio 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage;
-
-const saveBoardStyle = () => {
-  const pixelsinfo = document.querySelectorAll('.pixel').length;
-  const boardProperties = {
-    size: pixelSize,
-    width: mainBoard.style.width,
-    height: mainBoard.style.height,
-    pixels: pixelsinfo,
-  };
-  localStorage.boardSize = JSON.stringify(boardProperties);
-};
 
 // Exercicio 13 - Crie um input que permita à pessoa usuária preencher um novo tamanho
 // para o quadro de pixels
@@ -236,6 +261,7 @@ const newSizeBoard = () => {
 // Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
 
 inputBtn.addEventListener('click', () => {
+  localStorage.removeItem('pixelBoard');
   if (inputValue.value >= 5 && inputValue.value < 50) {
     newSizeBoard();
   } else if (inputValue.value >= 50) {
@@ -247,3 +273,10 @@ inputBtn.addEventListener('click', () => {
   saveBoardStyle();
 });
 // Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
+const savedDraw = () => {
+  mainBoard.innerHTML = '';
+  recoverBoardSize();
+  const recoverSize = JSON.parse(localStorage.boardSize);
+  const newPixelsDiv = recoverSize.pixels;
+  addPixels(newPixelsDiv);
+};
