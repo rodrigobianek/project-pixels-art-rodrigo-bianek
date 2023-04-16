@@ -84,20 +84,28 @@ btnRandom.addEventListener('click', () => {
 const sectionTwo = document.createElement('section');
 document.getElementsByTagName('main')[0].appendChild(sectionTwo);
 
+const pixelSize = 42;
 const divPixelsBoard = document.createElement('div');
+divPixelsBoard.style.width = '210px';
+divPixelsBoard.style.height = '210px';
 divPixelsBoard.id = 'pixel-board';
-divPixelsBoard.style.width = '200px';
-divPixelsBoard.style.height = '200px';
+
 sectionTwo.appendChild(divPixelsBoard);
 
-for (let index = 0; index < 25; index += 1) { // criando 25 divs pra representar os pixels
-  const pixelBlock = document.createElement('div');
-  pixelBlock.className = 'pixel';
-  pixelBlock.style.backgroundColor = 'rgb(255,255,255)';
-  pixelBlock.style.width = '40px';
-  pixelBlock.style.height = '40px';
-  divPixelsBoard.appendChild(pixelBlock);
-}
+const mainBoard = document.getElementById('pixel-board');
+
+const addPixels = (num) => {
+  for (let index = 0; index < num; index += 1) { // criando 25 divs pra representar os pixels
+    const pixelBlock = document.createElement('div');
+    pixelBlock.className = 'pixel';
+    pixelBlock.style.backgroundColor = 'rgb(255,255,255)';
+    pixelBlock.style.width = `'${pixelSize}px'`;
+    pixelBlock.style.width = `'${pixelSize}px'`;
+    divPixelsBoard.appendChild(pixelBlock);
+  }
+};
+
+addPixels(25);
 
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
 // e borda preta de 1px;
@@ -143,6 +151,9 @@ pixels.forEach((element) => {
 const removeColor = (e) => {
   e.preventDefault();
   e.target.style.backgroundColor = defaultbg;
+  if (e.target.classList.contains('painted')) {
+    e.target.classList.remove('painted');
+  }
 };
 
 divPixelsBoard.addEventListener('contextmenu', removeColor);
@@ -178,10 +189,6 @@ savePixels();
 // Exercicio 13 - Crie um input que permita à pessoa usuária preencher um novo tamanho
 // para o quadro de pixels
 
-// Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
-
-// Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
-
 const inputSize = document.createElement('div');
 inputSize.id = 'input';
 firstSection.firstChild.nextElementSibling.appendChild(inputSize);
@@ -189,8 +196,8 @@ firstSection.firstChild.nextElementSibling.appendChild(inputSize);
 const addInput = document.createElement('input');
 addInput.id = 'board-size';
 addInput.type = 'number';
-addInput.placeholder = 'Qtd. Pixels: 1 ~ 50';
-addInput.min = '1';
+addInput.placeholder = 'Qtd. Pixels: 5 ~ 50';
+addInput.min = '5';
 addInput.max = '50';
 inputSize.appendChild(addInput);
 
@@ -198,3 +205,16 @@ const inputBtn = document.createElement('button');
 inputBtn.id = 'generate-board';
 inputBtn.innerText = 'VQV';
 inputSize.appendChild(inputBtn);
+const inputValue = document.querySelector('#board-size');
+
+inputBtn.addEventListener('click', () => {
+  mainBoard.style.height = `${inputValue.value * pixelSize}px`;
+  mainBoard.style.width = `${inputValue.value * pixelSize}px`;
+  mainBoard.innerHTML = '';
+  const newPixelsDiv = (inputValue.value) * (inputValue.value);
+  addPixels(newPixelsDiv);
+});
+
+// Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
+
+// Exercicio 15 - Crie uma função pra manter o tamanho do board ao recarregar a pagina;
