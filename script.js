@@ -127,14 +127,6 @@ const recoverDraw = () => {
   console.log(recoveredBoard);
 };
 
-function recoverBoardSize() {
-  const recoverSize = JSON.parse(localStorage.boardSize);
-  const pixels = document.querySelectorAll('.pixel').length;
-  if (recoverSize.pixels !== pixels) {
-    mainBoard.style.width = recoverSize.width;
-    mainBoard.style.height = recoverSize.height;
-  }
-}
 // Exercicio 7 - Faça com que cada pixel tenha largura e altura de 40 px
 // e borda preta de 1px;
 
@@ -192,20 +184,13 @@ const applyColor = (e) => {
   saveDraw();
 };
 
-let pixels = Array.from(document.querySelectorAll('.pixel'));
-pixels.forEach((element) => {
-  element.addEventListener('click', applyColor);
-});
-
-// const removeColor = (e) => {
-//   e.preventDefault();
-//   e.target.style.backgroundColor = defaultbg;
-//   if (e.target.classList.contains('painted')) {
-//     e.target.classList.remove('painted');
-//   }
-// };
-
-// divPixelsBoard.addEventListener('contextmenu', removeColor);
+function addEventToBoard() {
+  const pixels = Array.from(document.querySelectorAll('.pixel'));
+  pixels.forEach((element) => {
+    element.addEventListener('click', applyColor);
+  });
+}
+addEventToBoard();
 
 // Exercicio 11 - Crie um botão que retorne a cor do quadro para a cor inicial;
 const resetBtn = document.createElement('button');
@@ -252,10 +237,7 @@ const newSizeBoard = () => {
   mainBoard.innerHTML = '';
   const newPixelsDiv = (inputValue.value) * (inputValue.value);
   addPixels(newPixelsDiv);
-  pixels = Array.from(document.querySelectorAll('.pixel'));
-  pixels.forEach((element) => {
-    element.addEventListener('click', applyColor);
-  });
+  addEventToBoard();
 };
 
 // Exercicio 14 - Crie uma função que limite o tamanho mínimo e máximo do quadro de pixels
@@ -280,3 +262,28 @@ const savedDraw = () => {
   const newPixelsDiv = recoverSize.pixels;
   addPixels(newPixelsDiv);
 };
+
+function recoverBoardSize() {
+  if (localStorage.getItem('boardSize')) {
+    const recoverSize = JSON.parse(localStorage.getItem('boardSize'));
+    const pixelsLength = document.getElementsByClassName('pixel').length;
+    if (recoverSize.pixels !== pixelsLength) {
+      mainBoard.innerHTML = '';
+      mainBoard.style.width = recoverSize.width;
+      mainBoard.style.height = recoverSize.height;
+      const newPixelsDiv = recoverSize.pixels;
+      addEventToBoard();
+      addPixels(newPixelsDiv);
+    }
+  }
+}
+recoverBoardSize();
+// const removeColor = (e) => {
+//   e.preventDefault();
+//   e.target.style.backgroundColor = defaultbg;
+//   if (e.target.classList.contains('painted')) {
+//     e.target.classList.remove('painted');
+//   }
+// };
+
+// divPixelsBoard.addEventListener('contextmenu', removeColor);
