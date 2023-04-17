@@ -37,15 +37,18 @@ div .color {
   width: 50px;
   height: 47px;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 1px;
   background-color: black;
+  place-items: stretch;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.82);
 }
 
 button {
   font-family: DotGothic16, sans-serif;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 1px;
   cursor: pointer;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.82);
 }
 
 button:hover {
@@ -67,16 +70,18 @@ button:hover {
   margin: auto;
   border: 1px solid black;
   box-sizing: content-box;
-  padding: 2px;
+  box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.82);
 }
 
 .pixel {
+  cursor: cell;
   margin: 0;
   border: 1px solid black;
   display: inline-block;
   width: 40px;
   height: 40px;
   background-color: white;
+  box-shadow: 5px 5px black;
 }
 
 #clear-board {
@@ -92,13 +97,15 @@ button:hover {
   padding: 7px;
   margin: auto;
   width: 150px;
-  height: 10px;
+  height: 13px;
   border: 2px solid black;
-  border-radius: 8px;
+  border-radius: 2px;
+  box-shadow: 2px 1px 1px 1px black;
 }
 
 #generate-board {
   padding: 2px;
   width: 70px;
   border: 2px solid black;
+  box-shadow: 2px 1px 1px 1px black;
 }
