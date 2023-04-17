@@ -14,8 +14,8 @@ body {
   color: black;
   font-family: Bungee Shade, cursive;
   font-size: 90px;
-  word-spacing: 10px;
-  margin-right: 200px;
+  word-spacing: 100px;
+  margin-right: 180px;
   margin-top: 30px;
   block-size: 150px;
   text-shadow: 1px 1px black;
@@ -108,4 +108,11 @@ button:hover {
   width: 70px;
   border: 2px solid black;
   box-shadow: 2px 1px 1px 1px black;
+}
+
+footer {
+  font-family: DotGothic16, sans-serif;
+  font-size: 12px;
+  padding: 50px;
+  color: lightslategrey;
 }
