@@ -1,9 +1,28 @@
 body {
-  padding: 20px;
-  margin: auto;
   display: block;
   justify-content: center;
   text-align: center;
+  background-image: url('./imgs/jn0h36jz4lb61.png');
+  background-color: black;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#project-title {
+  color: black;
+  font-family: Bungee Shade, cursive;
+  font-size: 90px;
+  word-spacing: 10px;
+  margin-right: 200px;
+  margin-top: 30px;
+  block-size: 150px;
+  text-shadow: 1px 1px black;
+}
+
+#title {
+  font-family: DotGothic16, sans-serif;
 }
 
 div {
@@ -13,14 +32,29 @@ div {
 }
 
 div .color {
+  cursor: cell;
   margin-block: 10px;
   width: 50px;
-  height: 50px;
+  height: 47px;
   border: 1px solid black;
+  border-radius: 10px;
   background-color: black;
 }
 
+button {
+  font-family: DotGothic16, sans-serif;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  transition: 0.1s;
+  background-color: rgb(132, 132, 245);
+}
+
 #button-random-color {
+  font-family: DotGothic16, sans-serif;
   margin-block: 10px;
   font-size: 10px;
   width: 90px;
@@ -46,6 +80,7 @@ div .color {
 }
 
 #clear-board {
+  font-family: DotGothic16, sans-serif;
   margin-block: 10px;
   font-size: 10px;
   width: 90px;
@@ -53,6 +88,7 @@ div .color {
 }
 
 #board-size {
+  font-family: DotGothic16, sans-serif;
   padding: 7px;
   margin: auto;
   width: 150px;
@@ -62,7 +98,7 @@ div .color {
 }
 
 #generate-board {
-  padding: 4px;
-  margin: auto;
+  padding: 2px;
+  width: 70px;
   border: 2px solid black;
 }
